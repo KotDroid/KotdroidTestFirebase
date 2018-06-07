@@ -1,2 +1,1 @@
-# KotdroidTestFirebase
-# KotdroidTestFirebase
+# this project just test for using firebase with kotlin
