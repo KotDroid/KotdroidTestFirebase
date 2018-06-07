@@ -29,6 +29,7 @@
             android:layout_weight="1"
             android:hint="Password"
             android:inputType="textPassword" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -39,11 +40,11 @@
         android:paddingRight="16dp">
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/btnSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:id="@+id/btnSignUp"/>
+            android:layout_weight="1"
+            android:text="Sign Up" />
 
         <Button
             android:layout_weight="1"
@@ -54,11 +55,31 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Forgot your password..!"
-        android:id="@+id/btnForgotPassword"/>
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingRight="16dp">
+
+        <EditText
+            android:id="@+id/EditForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot your password..!"
+            android:id="@+id/btnForgotPassword"/>
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

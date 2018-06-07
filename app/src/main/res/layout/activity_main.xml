@@ -7,12 +7,33 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingRight="16dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verify Email..!"
+            android:id="@+id/btnEmailVerification"/>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
         android:id="@+id/btnSignOut"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check if email verify"
+        android:id="@+id/checkEmail"/>
 
 
 </LinearLayout>
