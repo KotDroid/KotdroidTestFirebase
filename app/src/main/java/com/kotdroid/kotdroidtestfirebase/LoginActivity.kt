@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private var editForgotPassword: EditText? = null
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val TAG = "GoogleActivity"
-    private val RC_SIGN_IN = 9001
+    private val RC_SIGN_IN = 7021
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
