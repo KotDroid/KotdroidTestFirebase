@@ -11,17 +11,11 @@ import android.widget.EditText
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.internal.FirebaseAppHelper.getUid
-import com.google.firebase.auth.FirebaseUser
-import com.google.android.gms.tasks.Task
-import android.support.annotation.NonNull
 import android.util.Log
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.AuthCredential
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_login.*
@@ -61,27 +55,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // [START on_start_check_user]
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth!!.getCurrentUser()
-    }
-    // [END on_start_check_user]
-
-    // [START onactivityresult]
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account, btnGoogleSignIn.rootView)
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
 
             }
@@ -96,13 +78,10 @@ class LoginActivity : AppCompatActivity() {
         auth!!.signInWithCredential(credential)
                 .addOnCompleteListener(this, OnCompleteListener<AuthResult> { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success")
                         showMessage(view, "Sign In Success")
-                        val user = auth!!.getCurrentUser()
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
                         showMessage(view, "Error ${task.exception?.message}")
                     }
