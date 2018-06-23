@@ -1,10 +1,13 @@
 package com.kotdroid.kotdroidtestfirebase
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -13,11 +16,14 @@ class MainActivity : AppCompatActivity() {
     var auth :FirebaseAuth? = null
 
 
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+
+       Log.i("MAIN", auth!!.currentUser!!.email)
 
         val btnSignOut = findViewById<View>(R.id.btnSignOut) as Button
         val checkEmail = findViewById<View>(R.id.checkEmail) as Button
