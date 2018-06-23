@@ -6,8 +6,5 @@ What have you added to the project now <br />
 *sign in email with password<br />
 *virefivtion  email and check if verify or not<br />
 *reset passowrd 
-<<<<<<< Updated upstream
 *sign in with google
-=======
-*sign in this google
->>>>>>> Stashed changes
+
