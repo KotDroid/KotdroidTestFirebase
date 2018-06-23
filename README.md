@@ -6,3 +6,4 @@ What have you added to the project now <br />
 *sign in email with password<br />
 *virefivtion  email and check if verify or not<br />
 *reset passowrd 
+*sign in with google
