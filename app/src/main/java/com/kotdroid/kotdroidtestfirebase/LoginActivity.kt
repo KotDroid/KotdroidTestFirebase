@@ -5,29 +5,29 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
-import android.util.Log
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth? = null
     private var editForgotPassword: EditText? = null
+
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val TAG = "GoogleActivity"
     private val RC_SIGN_IN = 7021
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +35,14 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-
         initEmail()
         initGoogle()
 
     }
 
     private fun initGoogle() {
+
+        //تهيئة GoogleSignInOptions
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -52,11 +53,15 @@ class LoginActivity : AppCompatActivity() {
         findViewById<View>(R.id.btnGoogleSignIn).setOnClickListener{view->
             signIn()
         }
+
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // فحص requestCode لمعرفة رقم الطلب بحالتنا تم وضع الرقم 7021
+        // اذا كان رقم الطلب متطابق يبداءتسجيل الدخول عن طريق ارسال  البيانات الى firebaseAuthWithGoogle
+        // وبداخلها سوف يكون الخاص بتسجيل الدخول
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -70,12 +75,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun signIn() {
+        val signInIntent = mGoogleSignInClient!!.getSignInIntent()
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount, view: View) {
-        showMessage(view, "Authentication... ")
+        showMessage(view, "Authentication... ") // اظهار رسالة للمستخدم عند بدء تسجيل الدخول
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth!!.signInWithCredential(credential)
                 .addOnCompleteListener(this, OnCompleteListener<AuthResult> { task ->
+                    // فحس task اذا تم الامر بنجاح يتم تحويل المستخدم الى واجهةmain activity
+                    // اما اذا حدث خطأ في تسجيل الدخول يرمي استثناء
                     if (task.isSuccessful) {
                         Log.d(TAG, "signInWithCredential:success")
                         showMessage(view, "Sign In Success")
@@ -85,11 +97,6 @@ class LoginActivity : AppCompatActivity() {
                         showMessage(view, "Error ${task.exception?.message}")
                     }
                 })
-    }
-
-    private fun signIn() {
-        val signInIntent = mGoogleSignInClient!!.getSignInIntent()
-        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
     private fun initEmail() {
@@ -115,7 +122,6 @@ class LoginActivity : AppCompatActivity() {
         btnForgotPassword.setOnClickListener { view ->
             passwordForget(view)
         }
-
     }
 
     private fun passwordForget(view: View) {

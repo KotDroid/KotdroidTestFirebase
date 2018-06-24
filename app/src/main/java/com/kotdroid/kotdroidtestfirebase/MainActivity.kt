@@ -16,14 +16,13 @@ class MainActivity : AppCompatActivity() {
     var auth :FirebaseAuth? = null
 
 
-    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
 
-       Log.i("MAIN", auth!!.currentUser!!.email)
+       Log.i("MAIN", auth!!.currentUser!!.displayName)
 
         val btnSignOut = findViewById<View>(R.id.btnSignOut) as Button
         val checkEmail = findViewById<View>(R.id.checkEmail) as Button
@@ -60,5 +59,9 @@ class MainActivity : AppCompatActivity() {
     private fun showMessage(view : View,  message:String) {
         Snackbar.make(view, message , Snackbar.LENGTH_INDEFINITE).setAction("FIRE", null).show()
     }
+
+
+
+
 
 }
