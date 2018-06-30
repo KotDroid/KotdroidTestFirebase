@@ -3,37 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
         android:paddingRight="16dp">
 
         <Button
+            android:id="@+id/btnEmailVerification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Verify Email..!"
-            android:id="@+id/btnEmailVerification"/>
+            android:text="Verify Email..!" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Out"
-        android:id="@+id/btnSignOut"/>
+        android:text="Sign Out" />
 
     <Button
+        android:id="@+id/checkEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check if email verify"
-        android:id="@+id/checkEmail"/>
+        android:text="Check if email verify" />
+
+    <Button
+        android:id="@+id/addData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Add For Firebase Data" />
+
+    <Button
+        android:id="@+id/getData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="get data from Firebase" />
 
 
 </LinearLayout>

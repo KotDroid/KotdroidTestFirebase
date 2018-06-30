@@ -19,6 +19,9 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
+import com.google.firebase.auth.FirebaseUser
+
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,6 +41,14 @@ class LoginActivity : AppCompatActivity() {
         initEmail()
         initGoogle()
 
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth!!.getCurrentUser()
+       if (currentUser != null )
+           startActivity(Intent(this@LoginActivity, MainActivity::class.java))
     }
 
     private fun initGoogle() {
