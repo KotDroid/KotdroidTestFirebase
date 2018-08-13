@@ -1,4 +1,11 @@
 # this project just test for using firebase with kotlin
- creating a simple Kotlin application for Android!
- 
+ how using firebase with kotlin !
+
+What have you added to the project now 
+*sign up email with password
+*sign in email with password
+*virefivtion email and check if verify or not
+*reset passowrd 
+
+*sign in with google
 
